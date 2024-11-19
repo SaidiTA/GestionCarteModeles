@@ -1,0 +1,160 @@
+﻿@model IEnumerable<tay.Models.CarteModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_test.cshtml";
+}
+@*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">*@
+<style>
+    .modal-dialog {
+    }
+
+
+</style>
+<div id="searchModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Rechercher</h4>
+            </div>
+            <div class="modal-body">
+                <!-- Barre de recherche -->
+                <div class="form-group">
+                    <input type="text" id="searchInput" class="form-control" placeholder="Search...">
+                </div>
+                <!-- Contenu dynamique (tableau) -->
+                <div id="modalContent">
+                    <!-- Le contenu sera chargé ici -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modale pour les détails -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Details</h4>
+            </div>
+            <div class="modal-body">
+                <button id="btnDelete" class="btn btn-default btn-sm pull-right">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </button>
+                <button id="btnEdit" class="btn btn-default btn-sm pull-right" style="margin-right:5px;">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+                <p id="pDetails"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#searchModal">
+    Rechercher
+</button>
+
+
+<p>
+    <a href="@Url.Action("Create")" class="btn btn-primary">
+        <i class="fas fa-plus"></i> Nouvelle Carte
+    </a>
+</p>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
+            <div class="card text-center">
+                <div class="card-header">
+                    <div class="card-title">@Html.DisplayFor(modelItem => item.reference)</div>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <span style="color: @(item.status_carte == "Valide" ? "green" : "red")">
+                            @Html.DisplayFor(modelItem => item.status_carte)
+                        </span>
+                    </h5>
+                    <p class="card-text">@item.date_creation.ToString("yyyy-MM-dd")</p>
+                    @Html.ActionLink("Consulter les details", "Details", new { id = item.id }, new { @class = "btn btn-primary btn-sm" })
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.approve-button').click(function () {
+                var button = $(this);
+                var id = button.data('id');
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/CarteModels/Approve',
+                    data: { id: id },
+                    success: function (response) {
+                        if (response.success) {
+                            button.closest('tr').find('td:eq(3)').text('Valide'); // Mettez à jour le statut dans la ligne du tableau
+                        } else {
+                            alert('Échec de l\'approbation de la carte.');
+                        }
+                    }
+                });
+            });
+            $('#searchInput').on('input', function () {
+                var searchTerm = $(this).val();
+                if (searchTerm.length > 2) { // Lance la recherche après 3 caractères
+                    $.ajax({
+                        type: 'GET',
+                        url: "/CarteModels/Search",
+                        data: { reference: searchTerm },
+                        success: function (data) {
+                            var cardsHtml = '';
+
+                            $.each(data, function (index, item) {
+
+
+                                cardsHtml += `
+                                        <div class="card mb-3">
+                                            <div class="card-header">
+                                                <h5 class="card-title">${item.reference}</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <p><strong>Type Poste:</strong> ${item.type_poste == "Valide" ? "green" : "red"}</p>
+ 
+                                                <p><strong>Status:</strong> ${item.status}</p>
+                                                <p><strong>Status Carte:</strong> ${item.status_carte}</p>
+                                                <p><strong>Date Creation:</strong> ${item.date_creation}</p>
+                                                <p><strong>Date Fin:</strong> ${item.date_fin}</p>
+                                            </div>
+                                        </div>`;
+                            });
+
+                            $('#modalContent').html(cardsHtml);
+                        }
+                    });
+                } else {
+                    $('#modalContent').html(''); // Effacer les résultats si la recherche est trop courte
+                }
+            });
+
+        });
+
+    </script>
+}

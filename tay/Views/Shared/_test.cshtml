@@ -1,0 +1,278 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Meta -->
+    <meta name="description" content="Responsive Bootstrap4 Dashboard Template">
+    <meta name="author" content="ParkerThemes">
+    <link rel="shortcut icon" href="~/assets/img/fav.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Title -->
+    <title>Tis Circuits- AllCircuits</title>
+
+
+    <!-- *************
+        ************ Common Css Files *************
+    ************ -->
+    <!-- Bootstrap css -->
+    <link rel="stylesheet" href="~/assets/css/bootstrap.min.css">
+    <!-- Icomoon Font Icons css -->
+    <link rel="stylesheet" href="~/assets/fonts/style.css">
+    <!-- Main css -->
+    <link rel="stylesheet" href="~/assets/css/main.css">
+
+
+    <!-- *************
+        ************ Vendor Css Files *************
+    ************ -->
+    <!-- DateRange css -->
+    <link rel="stylesheet" href="~/assets/vendor/daterange/daterange.css" />
+    <link rel="stylesheet" href="~/assets/vendor/datatables/dataTables.bs4.css" />
+    <link rel="stylesheet" href="~/assets/vendor/datatables/dataTables.bs4-custom.css" />
+    <link href="~/assets/vendor/datatables/buttons.bs.css" rel="stylesheet" />
+    <!-- Calendar css -->
+    @*  <link rel="stylesheet" href="~/assets/vendor/calendar/css/core/main.css" />
+        <link rel="stylesheet" href="~/assets/vendor/calendar/css/daygrid/main.css" />*@
+
+</head>
+
+<body>
+
+    <!-- Loading starts -->
+    <div id="loading-wrapper">
+        <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Loading ends -->
+    <!-- Page wrapper start -->
+    <div class="page-wrapper pinned">
+
+        <!-- Sidebar wrapper start -->
+        <nav id="sidebar" class="sidebar-wrapper">
+
+            <!-- Sidebar brand start  -->
+            <div class="sidebar-brand">
+                @*  <a href="index.html" class="logo">
+                        <img src="~/assets/img/logo.png" alt="Le Rouge Admin Dashboard" />
+                    </a>*@
+                <a class="logo" href="@Url.Action("Index", "Home")">
+                    <img src="~/Images/capture.png" alt="Le Rouge Admin Dashboard">
+                </a>
+            </div>
+            <!-- Sidebar brand end  -->
+            <!-- Sidebar content start -->
+            <div class="sidebar-content">
+
+                <!-- sidebar menu start -->
+                <div class="sidebar-menu">
+                    <ul>
+
+
+                        <li class="sidebar-dropdown active">
+                            <a href="@Url.Action("Index", "Employes")">
+                                <i class="fa-solid fa-users"></i>
+                                <span class="menu-text">Employeés</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="@Url.Action("Index", "CarteModels")">
+                                <i class="fas fa-credit-card" style="color: red;"></i>
+                                <span class="menu-text">Cartes</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index", "Departements")">
+                                <i class="fa-solid fa-door-closed" style="color: red;"></i>
+                                <span class="menu-text">Départements</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index", "Roles")">
+                                <i class=" fa-solid fa-feather" style="color: red;"></i>
+                                <span class="menu-text">Roles</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-dropdown ">
+                            <a href="#">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span class="menu-text">Reunions</span>
+                                <i class="fas fa-chevron-down arrow-icon"></i>
+                            </a>
+                            <div class="sidebar-submenu">
+                                <ul>
+                                    <li>
+                                        <a href="@Url.Action("Calendrier", "Reunions")">Planifier une nouvelle reunion</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("Index", "Reunions")">Consulter la liste des Reunions</a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </li>
+
+
+
+
+                    </ul>
+                </div>
+                <!-- sidebar menu end -->
+
+            </div>
+            <!-- Sidebar content end -->
+
+        </nav>
+        <!-- Sidebar wrapper end -->
+        <!-- Page content start  -->
+        <div class="page-content">
+
+            <!-- Header start -->
+            <header class="header">
+                <div class="toggle-btns">
+                    <a id="toggle-sidebar" href="#">
+                        <i class="icon-list"></i>
+                    </a>
+                    <a id="pin-sidebar" href="#">
+                        <i class="fa-solid fa-list"></i>
+                    </a>
+                </div>
+                <div class="header-items">
+                    <!-- Custom search start -->
+                    <div class="custom-search">
+                        <input type="text" class="search-query" placeholder="Search here ...">
+                        <i class="icon-search1"></i>
+                    </div>
+                    <!-- Custom search end -->
+                    <!-- Header actions start -->
+                    <ul class="header-actions">
+                        <span class="user-name">Bonjour, @User.Identity.Name!</p></span>
+                        <li class="dropdown">
+                            <a href="#" id="userSettings" class="user-settings" data-toggle="dropdown" aria-haspopup="true">
+
+                                <span class="avatar">
+                                    <img src="~/Images/Capture1.png" alt="avatar">
+                                    <span class="status busy"></span>
+                                </span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userSettings">
+                                <div class="header-profile-actions">
+                                    <div class="header-user-profile">
+                                        <div class="header-user">
+                                            <img src="~/assets/img/user24.png" alt="Admin Template">
+                                        </div>
+                                        <h5> @User.Identity.Name!</h5>
+                                        <p>Admin</p>
+                                    </div>
+                                    <!--    <a href="user-profile.html"><i class="icon-user1"></i> My Profile</a>
+    <a href="account-settings.html"><i class="icon-settings1"></i> Account Settings</a>
+    <a href="login.html"><i class="icon-log-out1"></i> Sign Out</a> -->
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <!-- Header actions end -->
+                </div>
+            </header>
+            <!-- Header end -->
+            <!-- Page header start -->
+            <div class="page-header">
+                <ol class="breadcrumb">
+                </ol>
+
+                <ul class="app-actions">
+                    <li>
+                        <a href="#" id="reportrange">
+                            <span class="range-text"></span>
+
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- Page header end -->
+            <!-- Main container start -->
+            <div class="main-container">
+                @RenderBody()
+                <!-- row -->
+                @*<div class="row gutters">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+                            <div class="card m-0">
+                                <div class="card-body">
+
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>*@
+                <!-- row end -->
+
+            </div>
+            <!-- Main container end -->
+
+        </div>
+        <!-- Page content end -->
+
+    </div>
+    <!-- Page wrapper end -->
+    <!--**************************
+        **************************
+            **************************
+                        Required JavaScript Files
+            **************************
+        **************************
+    **************************-->
+    <!-- Required jQuery first, then Bootstrap Bundle JS -->
+    <script src="~/assets/js/jquery.min.js"></script>
+    <script src="~/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="~/assets/js/moment.js"></script>
+
+
+    <!-- *************
+        ************ Vendor Js Files *************
+    ************* -->
+    <!-- Slimscroll JS -->
+    <script src="~/assets/vendor/slimscroll/slimscroll.min.js"></script>
+    <script src="~/assets/vendor/slimscroll/custom-scrollbar.js"></script>
+
+    <!-- Daterange -->
+    <script src="~/assets/vendor/daterange/daterange.js"></script>
+    <script src="~/assets/vendor/daterange/custom-daterange.js"></script>
+    <!-- Data Tables -->
+    <script src="~/assets/vendor/datatables/dataTables.min.js"></script>
+    <script src="~/assets/vendor/datatables/dataTables.bootstrap.min.js"></script>
+
+    <!-- Custom Data tables -->
+    <script src="~/assets/vendor/datatables/custom/custom-datatables.js"></script>
+    <script src="~/assets/vendor/datatables/custom/fixedHeader.js"></script>
+    <!-- Apex Charts -->
+    <script src="~/assets/vendor/apex/apexcharts.min.js"></script>
+
+
+    <script src="~/assets/vendor/apex/admin/income.js"></script>
+
+
+    <!-- Fullcalendar -->
+    @*<script src="~/assets/vendor/calendar/js/core/main.min.js"></script>
+        <script src="~/assets/vendor/calendar/js/daygrid/main.min.js"></script>
+        <script src="~/assets/vendor/calendar/js/interaction/main.min.js"></script>
+        <script src="~/assets/vendor/calendar/js/custom.js"></script>*@
+
+
+    <!-- Main JS -->
+    <script src="~/assets/js/main.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

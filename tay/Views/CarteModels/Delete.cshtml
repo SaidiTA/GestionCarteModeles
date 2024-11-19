@@ -1,0 +1,73 @@
+﻿@model tay.Models.CarteModel
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_test.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>CarteModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.reference)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.reference)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.type_poste)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.type_poste)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.status_carte)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.status_carte)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.date_creation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date_creation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.date_fin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date_fin)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

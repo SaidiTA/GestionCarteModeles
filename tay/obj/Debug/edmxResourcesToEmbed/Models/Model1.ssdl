@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GestionCartesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CarteModel">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="reference" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="type_poste" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="status" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="status_carte" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="date_creation" Type="date" Nullable="false" />
+    <Property Name="date_fin" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Departement">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Employe">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nom_Prenom" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="matricule_Emp" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="matricule_W" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Responsable" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="role" Type="int" Nullable="false" />
+    <Property Name="departement" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="employe_carte">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idEmp" Type="int" Nullable="false" />
+    <Property Name="idCarte" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="reunion_employe">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ReunionTitre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="EmployeId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Reunions">
+    <Key>
+      <PropertyRef Name="Titre" />
+    </Key>
+    <Property Name="Titre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="Heures" Type="int" Nullable="false" />
+    <Property Name="Lieu" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nom" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Salles">
+    <Key>
+      <PropertyRef Name="nom" />
+    </Key>
+    <Property Name="nom" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="capacite" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_employe_carte_CarteModel">
+    <End Role="CarteModel" Type="Self.CarteModel" Multiplicity="1" />
+    <End Role="employe_carte" Type="Self.employe_carte" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CarteModel">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="employe_carte">
+        <PropertyRef Name="idCarte" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_employe_carte_Employe">
+    <End Role="Employe" Type="Self.Employe" Multiplicity="1" />
+    <End Role="employe_carte" Type="Self.employe_carte" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employe">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="employe_carte">
+        <PropertyRef Name="idEmp" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Employe_Departement">
+    <End Role="Departement" Type="Self.Departement" Multiplicity="1" />
+    <End Role="Employe" Type="Self.Employe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Departement">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Employe">
+        <PropertyRef Name="departement" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Employe_Role">
+    <End Role="Role" Type="Self.Role" Multiplicity="1" />
+    <End Role="Employe" Type="Self.Employe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Employe">
+        <PropertyRef Name="role" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_reunion_employe_Employe">
+    <End Role="Employe" Type="Self.Employe" Multiplicity="1" />
+    <End Role="reunion_employe" Type="Self.reunion_employe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employe">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="reunion_employe">
+        <PropertyRef Name="EmployeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_reunion_employe_Reunions">
+    <End Role="Reunions" Type="Self.Reunions" Multiplicity="1" />
+    <End Role="reunion_employe" Type="Self.reunion_employe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reunions">
+        <PropertyRef Name="Titre" />
+      </Principal>
+      <Dependent Role="reunion_employe">
+        <PropertyRef Name="ReunionTitre" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reunions_Salles">
+    <End Role="Salles" Type="Self.Salles" Multiplicity="1" />
+    <End Role="Reunions" Type="Self.Reunions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Salles">
+        <PropertyRef Name="nom" />
+      </Principal>
+      <Dependent Role="Reunions">
+        <PropertyRef Name="Lieu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="GestionCartesModelStoreContainer">
+    <EntitySet Name="CarteModel" EntityType="Self.CarteModel" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Departement" EntityType="Self.Departement" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employe" EntityType="Self.Employe" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="employe_carte" EntityType="Self.employe_carte" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="reunion_employe" EntityType="Self.reunion_employe" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Reunions" EntityType="Self.Reunions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Salles" EntityType="Self.Salles" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_employe_carte_CarteModel" Association="Self.FK_employe_carte_CarteModel">
+      <End Role="CarteModel" EntitySet="CarteModel" />
+      <End Role="employe_carte" EntitySet="employe_carte" />
+    </AssociationSet>
+    <AssociationSet Name="FK_employe_carte_Employe" Association="Self.FK_employe_carte_Employe">
+      <End Role="Employe" EntitySet="Employe" />
+      <End Role="employe_carte" EntitySet="employe_carte" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Employe_Departement" Association="Self.FK_Employe_Departement">
+      <End Role="Departement" EntitySet="Departement" />
+      <End Role="Employe" EntitySet="Employe" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Employe_Role" Association="Self.FK_Employe_Role">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="Employe" EntitySet="Employe" />
+    </AssociationSet>
+    <AssociationSet Name="FK_reunion_employe_Employe" Association="Self.FK_reunion_employe_Employe">
+      <End Role="Employe" EntitySet="Employe" />
+      <End Role="reunion_employe" EntitySet="reunion_employe" />
+    </AssociationSet>
+    <AssociationSet Name="FK_reunion_employe_Reunions" Association="Self.FK_reunion_employe_Reunions">
+      <End Role="Reunions" EntitySet="Reunions" />
+      <End Role="reunion_employe" EntitySet="reunion_employe" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reunions_Salles" Association="Self.FK_Reunions_Salles">
+      <End Role="Salles" EntitySet="Salles" />
+      <End Role="Reunions" EntitySet="Reunions" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

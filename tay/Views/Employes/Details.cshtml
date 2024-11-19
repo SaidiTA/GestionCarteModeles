@@ -1,0 +1,75 @@
+﻿@model tay.Models.Employe
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_test.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Employe</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nom_Prenom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nom_Prenom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.matricule_Emp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.matricule_Emp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.matricule_W)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.matricule_W)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Responsable)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Responsable)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Departement1.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Departement1.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Role1.nom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Role1.nom)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

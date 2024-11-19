@@ -1,0 +1,108 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<style>
+
+
+    .row {
+        display: flex;
+        justify-content: center; /* Centre les cartes horizontalement */
+        gap: 20px; /* Espace entre les cartes */
+    }
+
+    .col {
+        flex: 1; /* Permet aux colonnes de s'ajuster en largeur */
+        max-width: 300px; /* Limite la largeur maximale de chaque carte */
+    }
+
+    .info-stats4 {
+        border: 1px solid #ddd; /* Bordure pour visualiser les cartes */
+        padding: 20px;
+        text-align: center;
+        background-color: #fff;
+        border-radius: 8px;
+    }
+
+    .info-icon {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    .sale-num h3 {
+        margin: 0;
+        font-size: 28px;
+    }
+
+    .sale-num p {
+        margin: 0;
+        font-size: 16px;
+        color: #666;
+    }
+</style>
+
+<div class="row gutters">
+    <div class="col">
+        <div class="info-stats4">
+            <div class="info-icon">
+                <i class="fas fa-calendar-day"></i>
+            </div>
+            <div class="sale-num">
+                <h3>@Model.NombreCartes</h3>
+                <p>Cartes modeles</p>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="info-stats4">
+            <div class="info-icon">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="sale-num">
+                <h3>@Model.NombreEmployees</h3>
+                <p>Les employées</p>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="info-stats4">
+            <div class="info-icon">
+                <i class="fas fa-building"></i>
+            </div>
+            <div class="sale-num">
+                <h3>@Model.NombreDepartements</h3>
+                <p>Departements</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row gutters">
+    <div class="col">
+        <div class="info-stats4">
+            <div class="info-icon">
+                <i class="fas fa-check-square" style="color: green;"></i>
+            </div>
+            <div class="sale-num">
+                <h3>@Model.CarteValide</h3>
+                <p>Carte valide</p>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="info-stats4">
+            <div class="info-icon">
+                <i class="fas fa-check-square"></i>
+            </div>
+            <div class="sale-num">
+                <h3>@Model.CarteInvalide</h3>
+                <p>Carte Invalide</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="jumbotron">
+    <h1>Gestion des Cartes - Solution Web Intuitive</h1>
+    <p class="lead">Notre solution web offre une gestion complète et efficace des cartes, permettant de suivre et de contrôler l’état des cartes au sein de votre organisation. Elle fournit des fonctionnalités avancées telles que le suivi en temps réel des cartes valides et invalides, la gestion des employés et des départements associés, ainsi que des rapports statistiques pour une prise de décision éclairée. Conçue pour être intuitive et sécurisée, cette plateforme simplifie la gestion quotidienne des cartes et améliore la visibilité sur l’ensemble des opérations liées à leur usage..</p>
+    <p><a href="Consulter liste des cartes" class="btn btn-primary btn-lg">Consulter liste des cartes</a></p>
+</div>
+

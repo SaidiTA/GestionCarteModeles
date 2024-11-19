@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="GestionCartesModel1StoreContainer" CdmEntityContainer="GestionCartesEntities1">
+    <EntitySetMapping Name="CarteModel">
+      <EntityTypeMapping TypeName="GestionCartesModel1.CarteModel">
+        <MappingFragment StoreEntitySet="CarteModel">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="reference" ColumnName="reference" />
+          <ScalarProperty Name="type_poste" ColumnName="type_poste" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="status_carte" ColumnName="status_carte" />
+          <ScalarProperty Name="date_creation" ColumnName="date_creation" />
+          <ScalarProperty Name="date_fin" ColumnName="date_fin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Departement">
+      <EntityTypeMapping TypeName="GestionCartesModel1.Departement">
+        <MappingFragment StoreEntitySet="Departement">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="employe_carte">
+      <EntityTypeMapping TypeName="GestionCartesModel1.employe_carte">
+        <MappingFragment StoreEntitySet="employe_carte">
+          <ScalarProperty Name="idEmploye" ColumnName="idEmploye" />
+          <ScalarProperty Name="idCarte" ColumnName="idCarte" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employees">
+      <EntityTypeMapping TypeName="GestionCartesModel1.Employees">
+        <MappingFragment StoreEntitySet="Employees">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Nom_Prenom" ColumnName="Nom_Prenom" />
+          <ScalarProperty Name="matricule_Emp" ColumnName="matricule_Emp" />
+          <ScalarProperty Name="matricule_W" ColumnName="matricule_W" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Responsable" ColumnName="Responsable" />
+          <ScalarProperty Name="role" ColumnName="role" />
+          <ScalarProperty Name="departement" ColumnName="departement" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Role">
+      <EntityTypeMapping TypeName="GestionCartesModel1.Role">
+        <MappingFragment StoreEntitySet="Role">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

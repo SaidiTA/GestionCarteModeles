@@ -1,0 +1,71 @@
+﻿@model tay.Models.CarteModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_test.cshtml";
+}
+
+<div class="d-flex justify-content-center">
+    <div class="col-xl-6 col-lg-8 col-md-10 col-sm-12">
+        <div class="card text-center">
+
+            <div class="card-body">
+                <h4>Details du carte</h4>
+                <hr />
+                <dl class="dl-horizontal">
+                    <dt>@Html.DisplayNameFor(model => model.reference)</dt>
+                    <dd>@Html.DisplayFor(model => model.reference)</dd>
+
+                    <dt>@Html.DisplayNameFor(model => model.type_poste)</dt>
+                    <dd>@Html.DisplayFor(model => model.type_poste)</dd>
+
+                    <dt>@Html.DisplayNameFor(model => model.status)</dt>
+                    <dd>@Html.DisplayFor(model => model.status)</dd>
+
+                    <dt>@Html.DisplayNameFor(model => model.status_carte)</dt>
+                    <dd>@Html.DisplayFor(model => model.status_carte)</dd>
+
+                    <dt>@Html.DisplayNameFor(model => model.date_creation)</dt>
+                    <dd>@Html.DisplayFor(model => model.date_creation)</dd>
+
+                    <dt>@Html.DisplayNameFor(model => model.date_fin)</dt>
+                    <dd>@Html.DisplayFor(model => model.date_fin)</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p>
+    @Html.ActionLink("Delete", "Delete", new { id = Model.id }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+<button type="button" class="btn btn-success approve-button" data-id="@Model.id">Approuver</button>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.approve-button').click(function () {
+                var button = $(this);
+                var id = button.data('id');
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/CarteModels/Approve',
+                    data: { id: id },
+                    success: function (response) {
+                        if (response.success) {
+                            window.location.href = '/CarteModels/Index'; // Rediriger vers la liste après l'approbation
+                        } else {
+                            alert('Échec de l\'approbation de la carte.');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+}

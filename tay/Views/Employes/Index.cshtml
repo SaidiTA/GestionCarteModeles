@@ -1,0 +1,91 @@
+﻿@model IEnumerable<tay.Models.Employe>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_test.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<!-- Records Per Page Dropdown -->
+<div class="dataTables_length" id="basicExample_length">
+    <label>
+        Display
+        <select name="basicExample_length" aria-controls="basicExample" class="form-control form-control-sm selectpicker">
+            <option value="10">10</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+        </select>
+        Records Per Page
+    </label>
+</div>
+
+<!-- Table of Employees -->
+<table class="table table-bordered table-primary m-0">
+   
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nom_Prenom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.matricule_Emp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.matricule_W)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Responsable)
+        </th>
+        <th>
+            Departement
+        </th>
+        <th>
+            Role
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Nom_Prenom)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.matricule_Emp)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.matricule_W)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Email)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Responsable)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Departement1.name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Role1.nom)
+    </td>
+    <td>
+        @Html.ActionLink(" ", "Edit", new { id = item.id }, new { @class = "fa fa-edit", title = "Edit" }) |
+        @Html.ActionLink(" ", "Details", new { id = item.id }, new { @class = "fa fa-info-circle", title = "Details" }) |
+        @Html.ActionLink(" ", "Delete", new { id = item.id }, new { @class = "fa fa-trash", title = "Delete" })
+    </td>
+
+</tr>
+    }
+
+</table>
+
+<div class="col-sm-12 col-md-7"><div class="dataTables_paginate paging_simple_numbers" id="basicExample_paginate"><ul class="pagination pagination-sm"><li class="paginate_button page-item previous disabled" id="basicExample_previous"><a href="#" aria-controls="basicExample" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li><li class="paginate_button page-item active"><a href="#" aria-controls="basicExample" data-dt-idx="1" tabindex="0" class="page-link">1</a></li><li class="paginate_button page-item "><a href="#" aria-controls="basicExample" data-dt-idx="2" tabindex="0" class="page-link">2</a></li><li class="paginate_button page-item "><a href="#" aria-controls="basicExample" data-dt-idx="3" tabindex="0" class="page-link">3</a></li><li class="paginate_button page-item "><a href="#" aria-controls="basicExample" data-dt-idx="4" tabindex="0" class="page-link">4</a></li><li class="paginate_button page-item "><a href="#" aria-controls="basicExample" data-dt-idx="5" tabindex="0" class="page-link">5</a></li><li class="paginate_button page-item "><a href="#" aria-controls="basicExample" data-dt-idx="6" tabindex="0" class="page-link">6</a></li><li class="paginate_button page-item next" id="basicExample_next"><a href="#" aria-controls="basicExample" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li></ul></div></div>

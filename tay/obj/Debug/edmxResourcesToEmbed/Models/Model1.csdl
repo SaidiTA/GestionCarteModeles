@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GestionCartesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="GestionCartesEntities2" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Departement" EntityType="GestionCartesModel.Departement" />
+    <EntitySet Name="Employe" EntityType="GestionCartesModel.Employe" />
+    <AssociationSet Name="FK_Employe_Departement" Association="GestionCartesModel.FK_Employe_Departement">
+      <End Role="Departement" EntitySet="Departement" />
+      <End Role="Employe" EntitySet="Employe" />
+    </AssociationSet>
+    <EntitySet Name="Role" EntityType="GestionCartesModel.Role" />
+    <AssociationSet Name="FK_Employe_Role" Association="GestionCartesModel.FK_Employe_Role">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="Employe" EntitySet="Employe" />
+    </AssociationSet>
+    <EntitySet Name="CarteModel" EntityType="GestionCartesModel.CarteModel" />
+    <EntitySet Name="employe_carte" EntityType="GestionCartesModel.employe_carte" />
+    <AssociationSet Name="FK_employe_carte_CarteModel" Association="GestionCartesModel.FK_employe_carte_CarteModel">
+      <End Role="CarteModel" EntitySet="CarteModel" />
+      <End Role="employe_carte" EntitySet="employe_carte" />
+    </AssociationSet>
+    <AssociationSet Name="FK_employe_carte_Employe" Association="GestionCartesModel.FK_employe_carte_Employe">
+      <End Role="Employe" EntitySet="Employe" />
+      <End Role="employe_carte" EntitySet="employe_carte" />
+    </AssociationSet>
+    <EntitySet Name="reunion_employe" EntityType="GestionCartesModel.reunion_employe" />
+    <EntitySet Name="Reunions" EntityType="GestionCartesModel.Reunions" />
+    <EntitySet Name="Salles" EntityType="GestionCartesModel.Salles" />
+    <AssociationSet Name="FK_reunion_employe_Employe" Association="GestionCartesModel.FK_reunion_employe_Employe">
+      <End Role="Employe" EntitySet="Employe" />
+      <End Role="reunion_employe" EntitySet="reunion_employe" />
+    </AssociationSet>
+    <AssociationSet Name="FK_reunion_employe_Reunions" Association="GestionCartesModel.FK_reunion_employe_Reunions">
+      <End Role="Reunions" EntitySet="Reunions" />
+      <End Role="reunion_employe" EntitySet="reunion_employe" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reunions_Salles" Association="GestionCartesModel.FK_Reunions_Salles">
+      <End Role="Salles" EntitySet="Salles" />
+      <End Role="Reunions" EntitySet="Reunions" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Departement">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Employe" Relationship="GestionCartesModel.FK_Employe_Departement" FromRole="Departement" ToRole="Employe" />
+  </EntityType>
+  <EntityType Name="Employe">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nom_Prenom" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="matricule_Emp" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="matricule_W" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Responsable" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="role" Type="Int32" Nullable="false" />
+    <Property Name="departement" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Departement1" Relationship="GestionCartesModel.FK_Employe_Departement" FromRole="Employe" ToRole="Departement" />
+    <NavigationProperty Name="Role1" Relationship="GestionCartesModel.FK_Employe_Role" FromRole="Employe" ToRole="Role" />
+    <NavigationProperty Name="employe_carte" Relationship="GestionCartesModel.FK_employe_carte_Employe" FromRole="Employe" ToRole="employe_carte" />
+    <NavigationProperty Name="reunion_employe" Relationship="GestionCartesModel.FK_reunion_employe_Employe" FromRole="Employe" ToRole="reunion_employe" />
+  </EntityType>
+  <Association Name="FK_Employe_Departement">
+    <End Type="GestionCartesModel.Departement" Role="Departement" Multiplicity="1" />
+    <End Type="GestionCartesModel.Employe" Role="Employe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Departement">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Employe">
+        <PropertyRef Name="departement" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nom" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Employe" Relationship="GestionCartesModel.FK_Employe_Role" FromRole="Role" ToRole="Employe" />
+  </EntityType>
+  <Association Name="FK_Employe_Role">
+    <End Type="GestionCartesModel.Role" Role="Role" Multiplicity="1" />
+    <End Type="GestionCartesModel.Employe" Role="Employe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Employe">
+        <PropertyRef Name="role" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CarteModel">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="reference" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="type_poste" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="status_carte" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="date_creation" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="date_fin" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="employe_carte" Relationship="GestionCartesModel.FK_employe_carte_CarteModel" FromRole="CarteModel" ToRole="employe_carte" />
+  </EntityType>
+  <EntityType Name="employe_carte">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idEmp" Type="Int32" Nullable="false" />
+    <Property Name="idCarte" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CarteModel" Relationship="GestionCartesModel.FK_employe_carte_CarteModel" FromRole="employe_carte" ToRole="CarteModel" />
+    <NavigationProperty Name="Employe" Relationship="GestionCartesModel.FK_employe_carte_Employe" FromRole="employe_carte" ToRole="Employe" />
+  </EntityType>
+  <Association Name="FK_employe_carte_CarteModel">
+    <End Type="GestionCartesModel.CarteModel" Role="CarteModel" Multiplicity="1" />
+    <End Type="GestionCartesModel.employe_carte" Role="employe_carte" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CarteModel">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="employe_carte">
+        <PropertyRef Name="idCarte" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_employe_carte_Employe">
+    <End Type="GestionCartesModel.Employe" Role="Employe" Multiplicity="1" />
+    <End Type="GestionCartesModel.employe_carte" Role="employe_carte" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employe">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="employe_carte">
+        <PropertyRef Name="idEmp" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="reunion_employe">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ReunionTitre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="EmployeId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Employe" Relationship="GestionCartesModel.FK_reunion_employe_Employe" FromRole="reunion_employe" ToRole="Employe" />
+    <NavigationProperty Name="Reunions" Relationship="GestionCartesModel.FK_reunion_employe_Reunions" FromRole="reunion_employe" ToRole="Reunions" />
+  </EntityType>
+  <EntityType Name="Reunions">
+    <Key>
+      <PropertyRef Name="Titre" />
+    </Key>
+    <Property Name="Titre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Heures" Type="Int32" Nullable="false" />
+    <Property Name="Lieu" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="reunion_employe" Relationship="GestionCartesModel.FK_reunion_employe_Reunions" FromRole="Reunions" ToRole="reunion_employe" />
+    <NavigationProperty Name="Salles" Relationship="GestionCartesModel.FK_Reunions_Salles" FromRole="Reunions" ToRole="Salles" />
+  </EntityType>
+  <EntityType Name="Salles">
+    <Key>
+      <PropertyRef Name="nom" />
+    </Key>
+    <Property Name="nom" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="capacite" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Reunions" Relationship="GestionCartesModel.FK_Reunions_Salles" FromRole="Salles" ToRole="Reunions" />
+  </EntityType>
+  <Association Name="FK_reunion_employe_Employe">
+    <End Type="GestionCartesModel.Employe" Role="Employe" Multiplicity="1" />
+    <End Type="GestionCartesModel.reunion_employe" Role="reunion_employe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employe">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="reunion_employe">
+        <PropertyRef Name="EmployeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_reunion_employe_Reunions">
+    <End Type="GestionCartesModel.Reunions" Role="Reunions" Multiplicity="1" />
+    <End Type="GestionCartesModel.reunion_employe" Role="reunion_employe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reunions">
+        <PropertyRef Name="Titre" />
+      </Principal>
+      <Dependent Role="reunion_employe">
+        <PropertyRef Name="ReunionTitre" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reunions_Salles">
+    <End Type="GestionCartesModel.Salles" Role="Salles" Multiplicity="1" />
+    <End Type="GestionCartesModel.Reunions" Role="Reunions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Salles">
+        <PropertyRef Name="nom" />
+      </Principal>
+      <Dependent Role="Reunions">
+        <PropertyRef Name="Lieu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
